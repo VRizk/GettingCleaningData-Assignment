@@ -1,0 +1,45 @@
+---
+title: "README"
+author: "VRizk"
+date: "04/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+** This is the markdown document for the Getting and Cleaning data assignment **
+# Load and run useful packages
+Contained in the lines 1 to 7 of the script
+
+# Merge the train and test set to create a unique data set
+This part of the analysis is contained in the script from lines 9 to 37
+The merged data set is called "Unique_set"
+
+# Extract only mean and std for each measurement
+This part of the analysis is contained in the script from lines 39 to 69
+The data set containing only the mean and std measurements is called "Mean_Std"
+To get there, two intermediary steps:
+
+## Create a clean data set
+This clean data set is equivalent to Unique_set but the difference is that it does not replicate the measurement columns for the train and test. Despite, it contains a column saying whether we are looking at a train or test row and then we have only one version of the columns measurements
+This clean data set overrides the first "Unique_set" so that at the end of line 69 in the script, the clean set is called "Unique_set"
+
+## Extract Id columns + measurements corresponding to mean and std from the clean set
+To get the "Mean_Std" data set, I use the grep function to only extract the ID columns (train or test / subject / activity) and the measurement columns containing either "mean" or "std"
+
+# Use descriptive activity names in the data set
+The corresponding lines in the script are 71 and 72
+The data set with the descriptive activity names is called "Mean_Std_Act"
+To get there, we merge Mean_Std with the activity_labels data set
+
+# Appropriately label data
+The corresponding lines in the script are from 74 to 86
+The data set we get is called "Activity_Subject" where the first column is a unique ID including the type of activity and the subject who has performed it and the following columns are the mean and std measurements we wanted to keep
+
+# Getting the independent tidy data set with the average of each variable for each activity and each subject
+This is the last step of the script in line 88
+It is obtained combining the group_by and the summarise_all functions
+The corresponding and final data set is called "Activity_Subject_Mean"
+
